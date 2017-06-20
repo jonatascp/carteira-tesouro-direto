@@ -1,4 +1,6 @@
 var http = require('http');
+var cheerio = require('cheerio');
+var $;
 var data = '';
 
 var options = {
@@ -10,8 +12,12 @@ var request = http.request(options, function (res) {
         data += chunk;
     });
     res.on('end', function () {
-        console.log('tratar requisicao');
-        console.log(data);
+        $  = cheerio.load(data);
+        //$('entry>updated').each(function(i, elem) {
+          //console.log($(this).text());
+        //});
+        console.log($('entry>updated').text());
+
 
     });
 });
