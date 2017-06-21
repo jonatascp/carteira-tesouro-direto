@@ -9,3 +9,13 @@ http://www.bmfbovespa.com.br/pt_br/produtos/tesouro-direto/titulos-disponiveis-p
 Consulta diária ou perído da selic
 
 http://www.bcb.gov.br/htms/selic/selicdiarios.asp
+
+
+Inflação
+http://conteudo.bcb.gov.br/api/feed/pt-br/PAINEL_INDICADORES/inflacao
+
+Poupanca
+http://conteudo.bcb.gov.br/api/feed/pt-br/PAINEL_INDICADORES/poupanca
+
+Selic
+http://conteudo.bcb.gov.br/api/feed/pt-br/PAINEL_INDICADORES/juros
