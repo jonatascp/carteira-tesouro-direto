@@ -14,11 +14,11 @@ var ipcaJson = function (callback) {
 		var json = {
 		  "date-update": $('entry>updated').text(),
 		  "title": $('entry>title').text(),
-		  "rate": { "value": divs('#ratevalue').text(),
-		  			"date": divs('#ratedate').text()
+		  "rate": { "value": divs('#rate>#value')[0].children[0].data,
+		  			"obs": divs('#rate>#obs')[0].children[0].data
 		  		},
-		  "daily": { "value": divs('#dailyratevalue').text(),
-		  			"date": divs('#dailyratedate').text()
+		  "daily": { "value": divs('#rate>#value')[1].children[0].data,
+		  			"obs": divs('#rate>#obs')[1].children[0].data
 		  		}		
 		};
 

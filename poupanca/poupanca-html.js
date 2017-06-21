@@ -4,10 +4,10 @@ var contentHtml = '';
 
 var options = {
     host: 'conteudo.bcb.gov.br',
-    path: '/api/feed/pt-br/PAINEL_INDICADORES/inflacao'
+    path: '/api/feed/pt-br/PAINEL_INDICADORES/poupanca'
 }
 
-var ipcaHtml = function (callback) {
+var poupancaHtml = function (callback) {
 	
 	var request = http.request(options, function (res) {
 	    res.on('data', function (data) {
@@ -25,4 +25,4 @@ var ipcaHtml = function (callback) {
 
 };
 
-module.exports = ipcaHtml;
+module.exports = poupancaHtml;

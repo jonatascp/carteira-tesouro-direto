@@ -10,21 +10,63 @@ var tesouroDiretoJson = function (callback) {
 
 		$  = cheerio.load(response);
 		
-
-		var json = {
-		  "content": ''//$('.camposTesouroDireto').length
+		var arrayTitulosVenda = [];
+		/*var titulo = {
+			"titulo": "Titulo texto",
+			"data": "01/01/2015"
 		};
+		arrayTitulosVenda.push(titulo);
+		titulo = {
+			"titulo": "Titulo texto2",
+			"data": "01/01/2017"
+		};
+		arrayTitulosVenda.push(titulo);*/
+
+		
 
 		var initJson = true;
+		var numberAttribute = 0;
 
 		$('.portlet-body>table.tabelaPrecoseTaxas .camposTesouroDireto > td').each(function(i, elem) {
 			if (initJson) { 
-				console.log('INIT');
 				initJson = false;
+				numberAttribute = 0;
+				titulo = {
+					"titulo": i,
+					"vencimento": i,
+					"taxaRendimento": "",
+					"valorMinimo": "",
+					"precoUnitario": ""
+				};
 			}
-			console.log($(this).html());
-			if ((i+1) % 5 == 0) { console.log('END');initJson = true;}
+			
+			if (numberAttribute == 0) {
+				titulo.titulo = $(this).html();
+			}
+			if (numberAttribute == 1) {
+				titulo.vencimento = $(this).html();
+			}
+			if (numberAttribute == 2) {
+				titulo.taxaRendimento = $(this).html();
+			}
+			if (numberAttribute == 3) {
+				titulo.valorMinimo = $(this).html();
+			}
+			if (numberAttribute == 4) {
+				titulo.precoUnitario = $(this).html();
+			}
+
+			numberAttribute++;
+
+			if ((i+1) % 5 == 0) { 
+				initJson = true;
+				arrayTitulosVenda.push(titulo);
+			}
 		});
+
+		var json = {
+		  "titulos-venda": arrayTitulosVenda
+		};
 
 		return callback(json);
 	});
