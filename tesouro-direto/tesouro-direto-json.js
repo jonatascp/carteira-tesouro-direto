@@ -9,21 +9,14 @@ var tesouroDiretoJson = function (callback) {
 	tesouroDiretoHtml(function (response) {
 
 		$  = cheerio.load(response);
-		
-		var arrayTitulosVenda = [];
-		/*var titulo = {
-			"titulo": "Titulo texto",
-			"data": "01/01/2015"
-		};
-		arrayTitulosVenda.push(titulo);
-		titulo = {
-			"titulo": "Titulo texto2",
-			"data": "01/01/2017"
-		};
-		arrayTitulosVenda.push(titulo);*/
 
-		
+		var dataAtualizacao;
+		$('.portlet-body>b').each(function(i, elem) {
+			dataAtualizacao = $(this).html();
+		});
 
+		var arrayTitulosInvestir = [];
+		var arrayTitulosResgatar = [];
 		var initJson = true;
 		var numberAttribute = 0;
 
@@ -32,8 +25,8 @@ var tesouroDiretoJson = function (callback) {
 				initJson = false;
 				numberAttribute = 0;
 				titulo = {
-					"titulo": i,
-					"vencimento": i,
+					"titulo": "",
+					"vencimento": "",
 					"taxaRendimento": "",
 					"valorMinimo": "",
 					"precoUnitario": ""
@@ -60,12 +53,48 @@ var tesouroDiretoJson = function (callback) {
 
 			if ((i+1) % 5 == 0) { 
 				initJson = true;
-				arrayTitulosVenda.push(titulo);
+				arrayTitulosInvestir.push(titulo);
 			}
 		});
 
+		initJson = true;
+		$('.portlet-body>div.sanfonado>table.tabelaPrecoseTaxas .camposTesouroDireto > td').each(function(i, elem) {
+			if (initJson) { 
+				initJson = false;
+				numberAttribute = 0;
+				titulo = {
+					"titulo": "",
+					"vencimento": "",
+					"taxaRendimento": "",
+					"precoUnitario": ""
+				};
+			}
+			
+			if (numberAttribute == 0) {
+				titulo.titulo = $(this).html();
+			}
+			if (numberAttribute == 1) {
+				titulo.vencimento = $(this).html();
+			}
+			if (numberAttribute == 2) {
+				titulo.taxaRendimento = $(this).html();
+			}
+			if (numberAttribute == 3) {
+				titulo.precoUnitario = $(this).html();
+			}
+			
+			numberAttribute++;
+
+			if ((i+1) % 4 == 0) { 
+				initJson = true;
+				arrayTitulosResgatar.push(titulo);
+			}
+		});
+		
 		var json = {
-		  "titulos-venda": arrayTitulosVenda
+			"data": dataAtualizacao,	
+			"titulos-investir": arrayTitulosInvestir,
+			"titulos-resgatar": arrayTitulosResgatar
 		};
 
 		return callback(json);
