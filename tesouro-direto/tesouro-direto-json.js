@@ -93,8 +93,8 @@ var tesouroDiretoJson = function (callback) {
 		
 		var json = {
 			"data": dataAtualizacao,	
-			"titulos-investir": arrayTitulosInvestir,
-			"titulos-resgatar": arrayTitulosResgatar
+			"titulosInvestir": arrayTitulosInvestir,
+			"titulosResgatar": arrayTitulosResgatar
 		};
 
 		return callback(json);
