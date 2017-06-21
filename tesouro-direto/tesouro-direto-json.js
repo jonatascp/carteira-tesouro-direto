@@ -17,21 +17,6 @@ var tesouroDiretoJson = function (callback) {
 
 		$('.tabelaPrecoseTaxas .camposTesouroDireto > td').each(function(i, elem) {
 		  console.log($(this).html());
-		  //
-		  if (i == 0) {
-		  	// var array = $(this).html();
-			//titulo = cheerio.load($(this).html());
-			//console.log(titulo('td'));
-		  	//console.log('>>>>>' + i);
-
-		  	// console.log($(this).html());
-
-		  	//titulo = cheerio.load($(this).html());
-		  	//titulo.each(function(i, elem) {
-		  	//	console.log(this);
-		  	//});
-
-		  }
 		});
 
 		return callback(json);
