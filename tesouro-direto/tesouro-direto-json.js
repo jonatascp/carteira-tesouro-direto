@@ -15,8 +15,15 @@ var tesouroDiretoJson = function (callback) {
 		  "content": ''//$('.camposTesouroDireto').length
 		};
 
+		var initJson = true;
+
 		$('.portlet-body>table.tabelaPrecoseTaxas .camposTesouroDireto > td').each(function(i, elem) {
-		  console.log($(this).html());
+			if (initJson) { 
+				console.log('INIT');
+				initJson = false;
+			}
+			console.log($(this).html());
+			if ((i+1) % 5 == 0) { console.log('END');initJson = true;}
 		});
 
 		return callback(json);
