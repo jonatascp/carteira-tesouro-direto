@@ -1,6 +1,5 @@
 var http = require('http');
-
-var contentHtml = '';
+var registrarError = require('./registrar-error');
 
 var options = {
     host: 'tesouro.fazenda.gov.br',
@@ -8,7 +7,8 @@ var options = {
 }
 
 var tesouroDiretoHtml = function (callback) {
-	
+	var contentHtml = '';
+
 	var request = http.request(options, function (res) {
 	    res.on('data', function (data) {
 	    	contentHtml += data;
@@ -18,7 +18,7 @@ var tesouroDiretoHtml = function (callback) {
 	    });
 	});
 	request.on('error', function (e) {
-	    throw e;
+	    registrarError(e);
 	});
 
 	request.end();

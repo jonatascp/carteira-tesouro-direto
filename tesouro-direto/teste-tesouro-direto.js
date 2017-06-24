@@ -5,14 +5,13 @@ var updateLastDate = require('./update-last-date');
 var updateData = require('./update-data');
 var tesouroDiretoJson = require('./tesouro-direto-json');
 
-var j = schedule.scheduleJob('*/3 * * * *', function(){
+var j = schedule.scheduleJob('*/10 * * * * *', function(){
 	tesouroDiretoJson(function (json) {
-	  if (validarDataProcessamento(json)) {
-		console.log('Nada a processar em: ' + new Date());
-		} else {
+		var isProcessar = validarDataProcessamento(json);
+	 	if (isProcessar) {
 			updateLastDate(json);
 			updateData(json);
-		}
+		} 
 	});
 });
 

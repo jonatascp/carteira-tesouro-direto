@@ -15,7 +15,6 @@ var updateData = function(json) {
 
 	fs.appendFile(__dirname + '/dados.log', dadosTesouro, function (err) {
    		if (err) return console.log(err);
-   		console.log('Processamento realizando em: ' + new Date());
 	});
 };
 
